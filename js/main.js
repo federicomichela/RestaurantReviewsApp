@@ -120,6 +120,7 @@ updateRestaurants = () => {
     } else {
       resetRestaurants(restaurants);
       fillRestaurantsHTML();
+      newMap.invalidateSize();
     }
   })
 }
