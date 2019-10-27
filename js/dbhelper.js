@@ -14,6 +14,8 @@ class DBHelper {
 
   /**
    * Fetch all restaurants.
+   *
+   * @param callback (Method)
    */
   static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
@@ -33,6 +35,9 @@ class DBHelper {
 
   /**
    * Fetch a restaurant by its ID.
+   *
+   * @param id {String}
+   * @param callback {Method}
    */
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
@@ -52,6 +57,9 @@ class DBHelper {
 
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
+   *
+   * @param cuisine {String}
+   * @param callback {Method}
    */
   static fetchRestaurantByCuisine(cuisine, callback) {
     // Fetch all restaurants  with proper error handling
@@ -68,6 +76,9 @@ class DBHelper {
 
   /**
    * Fetch restaurants by a neighborhood with proper error handling.
+   *
+   * @param neighborhood {String}
+   * @param callback {Method}
    */
   static fetchRestaurantByNeighborhood(neighborhood, callback) {
     // Fetch all restaurants
@@ -84,6 +95,10 @@ class DBHelper {
 
   /**
    * Fetch restaurants by a cuisine and a neighborhood with proper error handling.
+   *
+   * @param cuisine {String}
+   * @param neighborhood {String}
+   * @param callback {Method}
    */
   static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
     // Fetch all restaurants
@@ -105,6 +120,8 @@ class DBHelper {
 
   /**
    * Fetch all neighborhoods with proper error handling.
+   *
+   * @param callback {Method}
    */
   static fetchNeighborhoods(callback) {
     // Fetch all restaurants
@@ -123,6 +140,8 @@ class DBHelper {
 
   /**
    * Fetch all cuisines with proper error handling.
+   *
+   * @param callback {Method}
    */
   static fetchCuisines(callback) {
     // Fetch all restaurants
@@ -141,6 +160,8 @@ class DBHelper {
 
   /**
    * Restaurant page URL.
+   *
+   * @param restaurant {Object}
    */
   static urlForRestaurant(restaurant) {
     return (`./restaurant.html?id=${restaurant.id}`);
@@ -148,6 +169,9 @@ class DBHelper {
 
   /**
    * Restaurant image URL.
+   *
+   * @param restaurant {Object}
+   * @param type {String}
    */
   static imageUrlForRestaurant(restaurant, type) {
       let resourceUrl;
@@ -173,14 +197,17 @@ class DBHelper {
 
   /**
    * Map marker for a restaurant.
+   *
+   * @param restaurant {Object}
    */
-   static mapMarkerForRestaurant(restaurant, map) {
+   static mapMarkerForRestaurant(restaurant) {
     // https://leafletjs.com/reference-1.3.0.html#marker
     const marker = new L.marker([restaurant.latlng.lat, restaurant.latlng.lng],
-      {title: restaurant.name,
-      alt: restaurant.name,
-      url: DBHelper.urlForRestaurant(restaurant)
-      })
+      {
+          'title': restaurant.name,
+          'alt': restaurant.name,
+          'url': DBHelper.urlForRestaurant(restaurant)
+      });
       marker.addTo(newMap);
     return marker;
   }

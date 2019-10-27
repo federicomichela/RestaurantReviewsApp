@@ -1,8 +1,6 @@
-let restaurants,
-  neighborhoods,
-  cuisines
-var newMap
-var markers = []
+let restaurants, neighborhoods, cuisines;
+var newMap;
+var markers = [];
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
@@ -29,6 +27,8 @@ fetchNeighborhoods = () => {
 
 /**
  * Set neighborhoods HTML.
+ *
+ * @param neighborhoods {Array}
  */
 fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   const select = document.getElementById('neighborhoods-select');
@@ -56,6 +56,8 @@ fetchCuisines = () => {
 
 /**
  * Set cuisines HTML.
+ *
+ * @param cuisines {Array}
  */
 fillCuisinesHTML = (cuisines = self.cuisines) => {
   const select = document.getElementById('cuisines-select');
@@ -127,6 +129,8 @@ updateRestaurants = () => {
 
 /**
  * Clear current restaurants, their HTML and remove their map markers.
+ *
+ * @param restaurants {List}
  */
 resetRestaurants = (restaurants) => {
   // Remove all restaurants
@@ -156,19 +160,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 /**
  * Create restaurant HTML.
  *
- * <figure class="works">
-   <picture>
-     <source media="(min-width: 768px)" srcset="images/RealisticGames_FunkySpin_lg-1024_2x.jpg 2x, images/RealisticGames_FunkySpin_lg-700_1x.jpg" />
-     <img src="images/RealisticGames_FunkySpin_sm.jpg" alt="Realistic Games - Funky Spin" />
-   </picture>
-   <span class="more">&raquo; Learn More</span>
-   <figcaption class="desc">
-       <h3>Realistic Games - Funky Spin</h3>
-       First progressives webgl three reels cabinet slot - featuring THREE.js, vanilla javascript, html5, css3
-   </figcaption>
- </figure>
- *
- *
+ * @param restaurant {Object}
  */
 createRestaurantHTML = (restaurant) => {
     const li = document.createElement('li');
@@ -214,6 +206,8 @@ createRestaurantHTML = (restaurant) => {
 
 /**
  * Add markers for current restaurants to the map.
+ * 
+ * @param restaurants {Array}
  */
 addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
