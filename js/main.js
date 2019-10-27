@@ -185,6 +185,9 @@ createRestaurantHTML = (restaurant) => {
     figure.append(figcaption);
     li.append(figure);
 
+    // accessibility
+    figure.setAttribute('aria-label', restaurant.name+restaurant.address);
+
     // filling dom elements
     let sourceset = [
         `${DBHelper.imageUrlForRestaurant(restaurant, '2x')} 2x`,
@@ -206,7 +209,7 @@ createRestaurantHTML = (restaurant) => {
 
 /**
  * Add markers for current restaurants to the map.
- * 
+ *
  * @param restaurants {Array}
  */
 addMarkersToMap = (restaurants = self.restaurants) => {
