@@ -175,6 +175,7 @@ createRestaurantHTML = (restaurant) => {
     const figure = document.createElement('figure');
     const picture = document.createElement('picture');
     const figcaption = document.createElement('figcaption');
+    const source = document.createElement('source');
     const image  = document.createElement('img');
     const name = document.createElement('h1');
     const neighborhood = document.createElement('p');
@@ -186,14 +187,22 @@ createRestaurantHTML = (restaurant) => {
     figcaption.append(neighborhood);
     figcaption.append(address);
     figcaption.append(more);
+    picture.append(source);
     picture.append(image);
     figure.append(picture);
     figure.append(figcaption);
     li.append(figure);
 
     // filling dom elements
+    let sourceset = [
+        `${DBHelper.imageUrlForRestaurant(restaurant, '2x')} 2x`,
+        `${DBHelper.imageUrlForRestaurant(restaurant, '1x')}`
+    ];
+    source.setAttribute('media', '(min-width: 768px)');
+    source.setAttribute('srcset', sourceset);
     image.className = 'restaurant-img';
     image.src = DBHelper.imageUrlForRestaurant(restaurant);
+    image.setAttribute('alt', `${restaurant.name} - ${restaurant.cuisine_type} cuisine`);
     name.innerHTML = restaurant.name;
     neighborhood.innerHTML = restaurant.neighborhood;
     address.innerHTML = restaurant.address;

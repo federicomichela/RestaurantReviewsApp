@@ -149,8 +149,26 @@ class DBHelper {
   /**
    * Restaurant image URL.
    */
-  static imageUrlForRestaurant(restaurant) {
-    return (`/img/${restaurant.photograph}`);
+  static imageUrlForRestaurant(restaurant, type) {
+      let resourceUrl;
+      let resourceParts = restaurant.photograph.split('.');
+      let resourceFormat = resourceParts[resourceParts.length-1];
+
+      resourceParts.splice(resourceParts.length-1, 1);
+
+      switch (type) {
+          case '2x':
+            resourceUrl = `/img/${resourceParts.join()}-1024_2x.${resourceFormat}`;
+            break;
+          case '1x':
+            resourceUrl = `/img/${resourceParts.join()}-700_1x.${resourceFormat}`;
+            break;
+          default:
+            resourceUrl = `/imgSrc/${restaurant.photograph}`;
+            break;
+      }
+
+      return resourceUrl;
   }
 
   /**

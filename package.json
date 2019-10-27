@@ -1,0 +1,24 @@
+{
+  "name": "restaurantreviewsapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/federicomichela/RestaurantReviewsApp.git"
+  },
+  "author": "Michela Federico",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/federicomichela/RestaurantReviewsApp/issues"
+  },
+  "homepage": "https://github.com/federicomichela/RestaurantReviewsApp#readme",
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-responsive-images": "^1.10.1"
+  }
+}
