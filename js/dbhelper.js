@@ -9,7 +9,7 @@ class DBHelper {
    */
   static get DATABASE_URL() {
     const port = 8887; // Change this to your server port
-    return `https://strange-mole-78.localtunnel.me/data/restaurants.json`;
+    return `https://orange-snail-21.localtunnel.me/data/restaurants.json`;
   }
 
   /**

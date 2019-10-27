@@ -155,31 +155,50 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 
 /**
  * Create restaurant HTML.
+ *
+ * <figure class="works">
+   <picture>
+     <source media="(min-width: 768px)" srcset="images/RealisticGames_FunkySpin_lg-1024_2x.jpg 2x, images/RealisticGames_FunkySpin_lg-700_1x.jpg" />
+     <img src="images/RealisticGames_FunkySpin_sm.jpg" alt="Realistic Games - Funky Spin" />
+   </picture>
+   <span class="more">&raquo; Learn More</span>
+   <figcaption class="desc">
+       <h3>Realistic Games - Funky Spin</h3>
+       First progressives webgl three reels cabinet slot - featuring THREE.js, vanilla javascript, html5, css3
+   </figcaption>
+ </figure>
+ *
+ *
  */
 createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');
+    const li = document.createElement('li');
+    const figure = document.createElement('figure');
+    const picture = document.createElement('picture');
+    const figcaption = document.createElement('figcaption');
+    const image  = document.createElement('img');
+    const name = document.createElement('h1');
+    const neighborhood = document.createElement('p');
+    const address = document.createElement('p');
+    const more = document.createElement('a');
 
-  const image = document.createElement('img');
-  image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  li.append(image);
+    // binding dom elements
+    figcaption.append(name);
+    figcaption.append(neighborhood);
+    figcaption.append(address);
+    figcaption.append(more);
+    picture.append(image);
+    figure.append(picture);
+    figure.append(figcaption);
+    li.append(figure);
 
-  const name = document.createElement('h1');
-  name.innerHTML = restaurant.name;
-  li.append(name);
-
-  const neighborhood = document.createElement('p');
-  neighborhood.innerHTML = restaurant.neighborhood;
-  li.append(neighborhood);
-
-  const address = document.createElement('p');
-  address.innerHTML = restaurant.address;
-  li.append(address);
-
-  const more = document.createElement('a');
-  more.innerHTML = 'View Details';
-  more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+    // filling dom elements
+    image.className = 'restaurant-img';
+    image.src = DBHelper.imageUrlForRestaurant(restaurant);
+    name.innerHTML = restaurant.name;
+    neighborhood.innerHTML = restaurant.neighborhood;
+    address.innerHTML = restaurant.address;
+    more.innerHTML = 'View Details';
+    more.href = DBHelper.urlForRestaurant(restaurant);
 
   return li
 }

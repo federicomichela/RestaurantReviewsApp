@@ -116,6 +116,7 @@ nav h1 a {
 	font-weight: normal;
 	line-height: 1;
 	margin: 10px;
+	padding: 10px;
 }
 .filter-options select {
 	background-color: white;
@@ -136,14 +137,14 @@ nav h1 a {
 	margin: 0;
 	padding: 30px 15px 60px;
 	text-align: center;
+	display: grid;
+    grid-gap: 1em;
 }
 #restaurants-list li {
 	background-color: #fff;
 	border: 2px solid #ccc;
 	font-family: Arial,sans-serif;
-	margin: 15px;
 	min-height: 380px;
-	padding: 0 30px 25px;
 	text-align: left;
 }
 #restaurants-list .restaurant-img {
@@ -274,14 +275,15 @@ nav h1 a {
 }
 
 
-@media screen and (min-width: 425px) {
+@media screen and (min-width: 512px) {
 	.filter-options {
 		display: grid;
-	    grid-template-columns: 2fr 15fr;
+	    grid-template-columns: 2fr 5fr;
 	    grid-auto-rows: minmax(50px, auto);
 	    align-items: center;
 	    justify-items: center;
 	}
+	.filter-options h2 { margin: 0; }
 	.filter-options .container {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -300,4 +302,6 @@ nav h1 a {
 		grid-row: 1
 	}
 	#map { height: 100%; }
+	.filter-options { grid-template-columns: unset; }
+	.filter-options h2 { justify-self: start; }
 }
