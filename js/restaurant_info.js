@@ -81,16 +81,36 @@ fetchRestaurantFromURL = (callback) => {
  */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
-  name.innerHTML = restaurant.name;
-
   const address = document.getElementById('restaurant-address');
-  address.innerHTML = restaurant.address;
-
+  const figure = document.createElement('figure');
+  const picture = document.createElement('picture');
+  const figcaption = document.createElement('figcaption');
+  const source = document.createElement('source');
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
-
   const cuisine = document.getElementById('restaurant-cuisine');
+
+  // binding dom elements
+  figcaption.append(cuisine);
+  figcaption.append(address);
+  picture.append(source);
+  picture.append(image);
+  figure.append(picture);
+  figure.append(figcaption);
+  name.parentNode.insertBefore(figure, name.nextSibling);
+
+
+  // filling dom elements
+  let sourceset = [
+      `${DBHelper.imageUrlForRestaurant(restaurant, '2x')} 2x`,
+      `${DBHelper.imageUrlForRestaurant(restaurant, '1x')}`
+  ];
+  source.setAttribute('media', '(min-width: 768px)');
+  source.setAttribute('srcset', sourceset);
+  image.className = 'restaurant-img';
+  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.setAttribute('alt', `${name} - ${cuisine} cuisine`);
+  name.innerHTML = restaurant.name;
+  address.innerHTML = restaurant.address;
   cuisine.innerHTML = restaurant.cuisine_type;
 
   // fill operating hours
@@ -105,20 +125,23 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  * Create restaurant operating hours HTML table and add it to the webpage.
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
-  const hours = document.getElementById('restaurant-hours');
-  for (let key in operatingHours) {
-    const row = document.createElement('tr');
+    const hours = document.getElementById('restaurant-hours');
 
-    const day = document.createElement('td');
-    day.innerHTML = key;
-    row.appendChild(day);
+    for (let key in operatingHours) {
+        const row = document.createElement('div');
+        const day = document.createElement('div');
+        const time = document.createElement('div');
 
-    const time = document.createElement('td');
-    time.innerHTML = operatingHours[key];
-    row.appendChild(time);
+        // binding dom elements
+        row.append(day);
+        row.append(time);
+        hours.append(row);
 
-    hours.appendChild(row);
-  }
+        // filling dom elements
+        row.classList.add('grid-row');
+        day.innerHTML = key;
+        time.innerHTML = operatingHours[key];
+    }
 }
 
 /**
@@ -148,21 +171,30 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
+  const heading = document.createElement('div');
+  const main = document.createElement('div');
   const name = document.createElement('p');
-  name.innerHTML = review.name;
-  li.appendChild(name);
-
   const date = document.createElement('p');
-  date.innerHTML = review.date;
-  li.appendChild(date);
-
   const rating = document.createElement('p');
-  rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
-
   const comments = document.createElement('p');
+
+  main.append(rating);
+  main.append(comments);
+  heading.append(name);
+  heading.append(date);
+  li.append(heading);
+  li.append(main);
+
+  li.classList.add('container');
+  heading.classList.add('review-heading');
+  main.classList.add('review-main');
+  rating.classList.add('review-rating');
+  comments.classList.add('review-comments');
+
+  name.innerHTML = review.name;
+  date.innerHTML = review.date;
+  rating.innerHTML = `Rating: ${review.rating}`;
   comments.innerHTML = review.comments;
-  li.appendChild(comments);
 
   return li;
 }
