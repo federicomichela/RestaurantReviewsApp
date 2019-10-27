@@ -284,9 +284,12 @@ nav h1 a {
 .review-heading p:nth-child(even) {
 	text-align: right;
 }
+.review-main { border-bottom-right-radius: 20px; }
+
 
 .container { display: grid; }
 
+/* ====================== Responsive Breakpoints ====================== */
 @media screen and (min-width: 512px) {
 	.filter-options {
 		display: grid;
