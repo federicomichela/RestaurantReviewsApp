@@ -10,12 +10,9 @@ self.addEventListener('install', event => {
     const urlsToCache = [
         '/',
         '/favicon.ico',
-        '/imgSrc/offline.gif',
         '/css/styles.css',
         '/js/dbhelper.js',
-        '/js/main.js',
-        'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css',
-        'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js'
+        '/js/main.js'
     ];
     event.waitUntil(
         caches.open('restaurants-reviews-app-cache')

@@ -145,7 +145,6 @@ nav h1 a {
 	background-color: #fff;
 	border: 2px solid #ccc;
 	font-family: Arial,sans-serif;
-	min-height: 380px;
 	text-align: left;
 }
 #restaurants-list .restaurant-img {
@@ -320,6 +319,11 @@ nav h1 a {
 
 	.filter-options { grid-template-columns: unset; }
 	.filter-options h2 { justify-self: start; }
+
+	#restaurants-list {
+		height: calc(100vh - 310px);
+		overflow-y: auto;
+	}
 
 	#restaurant-hours .grid-row { grid-template-columns: 1fr 4fr;}
 	#restaurant-hours .grid-row div:nth-child(odd) {
