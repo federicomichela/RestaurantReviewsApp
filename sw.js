@@ -29,19 +29,16 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
     event.respondWith(
-        caches.match(event.request)
-              .then(response => {
-                  response || fetch(event.request)
-              })
-        // fetch(event.request)
-        // .then(response => {
-        //     if (response.status === 404) {
-        //         return fetch('/imgSrc/offline.gif');
-        //     }
-        //
-        //     return request;
-        // }).catch(() => {
-        //     return new Response('Whoopsy! You appear to be offline!');
-        // })
+        caches.open('restaurants-reviews-app-cache').then(cache =>
+            cache.match(event.request)
+            .then(response => {
+                return response ||
+                       fetch(event.request)
+                       .then(response => {
+                           cache.put(event.request, response.clone());
+                           return response;
+                       })
+            })
+        )
     )
 });
